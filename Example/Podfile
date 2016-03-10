@@ -1,12 +1,1 @@
-source 'https://github.com/CocoaPods/Specs.git'
-use_frameworks!
-
-target 'BrowsePictureViewController_Example', :exclusive => true do
-  pod 'BrowsePictureViewController', :path => '../'
-end
-
-target 'BrowsePictureViewController_Tests', :exclusive => true do
-  pod 'BrowsePictureViewController', :path => '../'
-
-  
-end
+pod 'BrowsePictureViewController', :path => '../'

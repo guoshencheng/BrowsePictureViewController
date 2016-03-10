@@ -1,0 +1,20 @@
+PODS:
+  - BrowsePictureViewController (0.1.0):
+    - Masonry
+    - pop
+  - Masonry (0.6.4)
+  - pop (1.0.9)
+
+DEPENDENCIES:
+  - BrowsePictureViewController (from `../`)
+
+EXTERNAL SOURCES:
+  BrowsePictureViewController:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  BrowsePictureViewController: 446dbdc0244f1344cde8ba99cfeed2b3273ddd75
+  Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
+  pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
+
+COCOAPODS: 0.39.0

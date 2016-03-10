@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2EE9DE3252FD7B2C6FAEEFDC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BD61BB08B722EECFF58F05 /* libPods.a */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -22,7 +23,6 @@
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
 		DEBAE5E78465A0D39DC4F836 /* Pods_BrowsePictureViewController_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 928112F56A5E1672ABE2EAF1 /* Pods_BrowsePictureViewController_Tests.framework */; };
-		FC514CEAC8E378D8954716BE /* Pods_BrowsePictureViewController_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D19026C5F9A20FC2EA4C6DC4 /* Pods_BrowsePictureViewController_Example.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +37,9 @@
 
 /* Begin PBXFileReference section */
 		05D1AFA4D70023830C318A2C /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		1681FADDABD7EAF3FFD25E3E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		4107781FB5916707CC05E1AC /* BrowsePictureViewController.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = BrowsePictureViewController.podspec; path = ../BrowsePictureViewController.podspec; sourceTree = "<group>"; };
+		43BD61BB08B722EECFF58F05 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		569E96F151A3FDC62BCA98D0 /* Pods-BrowsePictureViewController_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BrowsePictureViewController_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BrowsePictureViewController_Tests/Pods-BrowsePictureViewController_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* BrowsePictureViewController_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BrowsePictureViewController_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -63,6 +65,7 @@
 		928112F56A5E1672ABE2EAF1 /* Pods_BrowsePictureViewController_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BrowsePictureViewController_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9700119BC9C725493C2E25CD /* Pods-BrowsePictureViewController_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BrowsePictureViewController_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-BrowsePictureViewController_Example/Pods-BrowsePictureViewController_Example.release.xcconfig"; sourceTree = "<group>"; };
 		9F8FFC02E5F1B6AB19B8B79E /* Pods-BrowsePictureViewController_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BrowsePictureViewController_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BrowsePictureViewController_Example/Pods-BrowsePictureViewController_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		A807EE2EC8271A2075A03C8F /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		C5A45534CD014A021D74B923 /* Pods-BrowsePictureViewController_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BrowsePictureViewController_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BrowsePictureViewController_Tests/Pods-BrowsePictureViewController_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		D19026C5F9A20FC2EA4C6DC4 /* Pods_BrowsePictureViewController_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BrowsePictureViewController_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -75,7 +78,7 @@
 				6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */,
 				6003F592195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F58E195388D20070C39A /* Foundation.framework in Frameworks */,
-				FC514CEAC8E378D8954716BE /* Pods_BrowsePictureViewController_Example.framework in Frameworks */,
+				2EE9DE3252FD7B2C6FAEEFDC /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,6 +103,8 @@
 				9700119BC9C725493C2E25CD /* Pods-BrowsePictureViewController_Example.release.xcconfig */,
 				569E96F151A3FDC62BCA98D0 /* Pods-BrowsePictureViewController_Tests.debug.xcconfig */,
 				C5A45534CD014A021D74B923 /* Pods-BrowsePictureViewController_Tests.release.xcconfig */,
+				A807EE2EC8271A2075A03C8F /* Pods.debug.xcconfig */,
+				1681FADDABD7EAF3FFD25E3E /* Pods.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -134,6 +139,7 @@
 				6003F5AF195388D20070C39A /* XCTest.framework */,
 				D19026C5F9A20FC2EA4C6DC4 /* Pods_BrowsePictureViewController_Example.framework */,
 				928112F56A5E1672ABE2EAF1 /* Pods_BrowsePictureViewController_Tests.framework */,
+				43BD61BB08B722EECFF58F05 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -350,7 +356,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BrowsePictureViewController_Example/Pods-BrowsePictureViewController_Example-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D655AE28D3A9D305738517D6 /* Embed Pods Frameworks */ = {
@@ -380,7 +386,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BrowsePictureViewController_Example/Pods-BrowsePictureViewController_Example-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -509,7 +515,7 @@
 		};
 		6003F5C0195388D20070C39A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9F8FFC02E5F1B6AB19B8B79E /* Pods-BrowsePictureViewController_Example.debug.xcconfig */;
+			baseConfigurationReference = A807EE2EC8271A2075A03C8F /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -525,7 +531,7 @@
 		};
 		6003F5C1195388D20070C39A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9700119BC9C725493C2E25CD /* Pods-BrowsePictureViewController_Example.release.xcconfig */;
+			baseConfigurationReference = 1681FADDABD7EAF3FFD25E3E /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -541,7 +547,6 @@
 		};
 		6003F5C3195388D20070C39A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 569E96F151A3FDC62BCA98D0 /* Pods-BrowsePictureViewController_Tests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -565,7 +570,6 @@
 		};
 		6003F5C4195388D20070C39A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C5A45534CD014A021D74B923 /* Pods-BrowsePictureViewController_Tests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
