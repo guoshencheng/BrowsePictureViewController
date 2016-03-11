@@ -10,36 +10,40 @@
 #import "BrowsePictureViewController.h"
 #import <Masonry/Masonry.h>
 
-@interface CGViewController ()<BrowsePictureViewControllerDelegate>
+@interface TestCell : UITableViewCell;
+
+@end
+
+@implementation TestCell
+
+- (instancetype)init {
+    if (self = [super init]) {
+        }
+    return self;
+}
+
+@end
+
+@interface CGViewController ()<BrowsePictureViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) UIButton *button;
-@property (strong, nonatomic) UIImageView *imageView;
+@property (strong, nonatomic) UITableView *tableView;
 
 @end
 
 @implementation CGViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    [self.view setBackgroundColor:[UIColor whiteColor]];
-    self.button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
-    [self.view addSubview:self.button];
-    [self.button setBackgroundColor:[UIColor blackColor]];
-    [self.button addTarget:self action:@selector(didClickButton) forControlEvents:UIControlEventTouchUpInside];
-    
-    
-    self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(50, 50, 100, 100)];
-    [self.view addSubview:self.imageView];
-    [self.imageView setUserInteractionEnabled:YES];
-    [self.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.center.equalTo(@0);
-        make.width.equalTo(@100);
-        make.height.equalTo(@100);
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 400)];
+    [self.view addSubview:self.tableView];
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(@(0));
+        make.width.equalTo(@(320));
+        make.height.equalTo(@(400));
     }];
-    [self.imageView setImage:[UIImage imageNamed:@"test_image"]];
-    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didClickImageView)];
-    self.imageView.layer.cornerRadius = 50;
-    [self.imageView addGestureRecognizer:gesture];
+    [self.tableView registerClass:[TestCell class] forCellReuseIdentifier:@"TestCell"];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
 }
 
 - (void)didClickButton {
@@ -48,8 +52,9 @@
     [self.navigationController pushBrowsePictureViewController:viewController];
 }
 
-- (void)didClickImageView {
+- (void)didClickImageView:(UIGestureRecognizer *)gesture {
     BrowsePictureViewController *viewController = [BrowsePictureViewController create];
+    viewController.startPage = gesture.view.tag;
     viewController.delegate = self;
     [self.navigationController pushBrowsePictureViewController:viewController];
 }
@@ -59,20 +64,34 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    BrowsePictureViewController *viewController = [BrowsePictureViewController create];
+    viewController.startPage = indexPath.row;
+    viewController.delegate = self;
+    [self.navigationController pushBrowsePictureViewController:viewController];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 20;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    TestCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TestCell"];
+    cell.imageView.image = [UIImage imageNamed:@"test_image"];
+    return cell;
+}
+
 - (void)browsePictureViewController:(BrowsePictureViewController *)browsePictureViewController downLoadImage:(ImageDownLoadFinish)downLoadImage index:(NSInteger)Index {
     
 }
 
-- (NSString *)browsePictureViewController:(BrowsePictureViewController *)browsePictureViewController textAtIndex:(NSInteger)index {
-    return nil;
-}
-
 - (UIImageView *)browsePictureViewController:(BrowsePictureViewController *)browsePictureViewController imageViewAtIndex:(NSInteger)index {
-    return self.imageView;
+    TestCell *cell = (TestCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:index inSection:0]];
+    return cell.imageView;
 }
 
 - (NSInteger)numberOfImagesInBrowsePictureViewController:(BrowsePictureViewController *)browsePitureViewController {
-    return 1;
+    return 20;
 }
 
 - (void)browsePictureViewControllerDidFinishSaving:(BrowsePictureViewController *)browsePictureViewController {

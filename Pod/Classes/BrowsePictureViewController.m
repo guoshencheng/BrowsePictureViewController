@@ -104,6 +104,8 @@
 
 - (void)configureCollectionView {
     self.collectionView.dataSource = self;
+    self.collectionView.delegate = self;
+    [self.collectionView setContentOffset:CGPointMake(self.startPage * [UIScreen mainScreen].bounds.size.width, 0) animated:NO];
     [self.collectionView registerNib:[UINib nibWithNibName:BROWSE_PICTURE_CELL_NIBNAME bundle:nil] forCellWithReuseIdentifier:BROWSE_PICTURE_CELL_ID];
 }
 
@@ -113,6 +115,8 @@
     } else {
         self.pageControl.numberOfPages = 1;
     }
+    self.pageControl.currentPage = self.startPage;
+    self.pageControl.hidden = self.pageControl.numberOfPages == 1;
 }
 
 - (void)configureSaveButton {
@@ -196,6 +200,17 @@
         return 1;
     }
 }
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    NSInteger page = scrollView.contentOffset.x / [UIScreen mainScreen].bounds.size.width;
+    if (page != self.pageControl.currentPage) {
+        self.pageControl.currentPage = page;
+    }
+}
+
+#pragma mark - UINavigationControllerDelegate
 
 - (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC {
     if (operation == UINavigationControllerOperationPop) {

@@ -46,6 +46,7 @@ NSString *const kIMAGEVIEW_APEAR_TRANSITION_KEY = @"kpop_ImageViewApearTransitio
 
 - (void)animateToPush {
     [self configureValue];
+    originImageView.hidden = YES;
     toViewController.view.hidden = YES;
     POPBasicAnimation *animation = [self popAnimation];
     animation.fromValue = @(0);
@@ -95,6 +96,7 @@ NSString *const kIMAGEVIEW_APEAR_TRANSITION_KEY = @"kpop_ImageViewApearTransitio
     [UIView animateWithDuration:0.05 animations:^{
         toViewController.view.alpha = 1;
     } completion:^(BOOL finished) {
+        originImageView.hidden = NO;
         [fromViewController.view removeFromSuperview];
         [animationView removeFromSuperview];
         [context completeTransition:![context transitionWasCancelled]];
