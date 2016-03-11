@@ -38,6 +38,7 @@
     }];
     [self.imageView setImage:[UIImage imageNamed:@"test_image"]];
     UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didClickImageView)];
+    self.imageView.layer.cornerRadius = 50;
     [self.imageView addGestureRecognizer:gesture];
 }
 

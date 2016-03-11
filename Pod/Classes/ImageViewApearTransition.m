@@ -11,6 +11,7 @@
 #import "BrowsePictureViewController.h"
 
 NSString *const kPOPIMAGEVIEW_APEAR_PROPERTY = @"pop.animtion.image.apear";
+NSString *const kIMAGEVIEW_APEAR_TRANSITION_KEY = @"kpop_ImageViewApearTransition";
 
 @interface ImageViewApearTransition ()
 
@@ -41,19 +42,14 @@ NSString *const kPOPIMAGEVIEW_APEAR_PROPERTY = @"pop.animtion.image.apear";
     }
 }
 
+#pragma mark - Animations
+
 - (void)animateToPush {
     [self configureValue];
     toViewController.view.hidden = YES;
     POPBasicAnimation *animation = [self popAnimation];
     animation.fromValue = @(0);
     animation.toValue = @(1);
-    [self pop_addAnimation:animation forKey:@"ImageViewApearTransition"];
-    if (originImageView.layer.cornerRadius != 0) {
-        POPBasicAnimation *cornerAnimation = [self popCornerAnimation];
-        cornerAnimation.fromValue = @(originImageView.layer.cornerRadius);
-        cornerAnimation.toValue = @(0);
-        [animationView.layer pop_addAnimation:cornerAnimation forKey:@"ImageViewApearCornerTransition"];
-    }
 }
 
 - (void)animateToPop {
@@ -66,68 +62,55 @@ NSString *const kPOPIMAGEVIEW_APEAR_PROPERTY = @"pop.animtion.image.apear";
         POPBasicAnimation *animation = [self popAnimation];
         animation.fromValue = @(1);
         animation.toValue = @(0);
-        if (originImageView.layer.cornerRadius != 0) {
-            POPBasicAnimation *cornerAnimation = [self popCornerAnimation];
-            cornerAnimation.fromValue = @(0);
-            cornerAnimation.toValue = @(originImageView.layer.cornerRadius);
-            [animationView.layer pop_addAnimation:cornerAnimation forKey:@"ImageViewApearCornerTransition"];
-        }
-        [self pop_addAnimation:animation forKey:@"ImageViewApearTransition"];
     }];
 }
 
-- (void)configureValue {
-    [animationView pop_removeAnimationForKey:@"ImageViewApearTransition"];
-    [animationView pop_removeAnimationForKey:@"ImageViewApearCornerTransition"];
-    fromViewController = self.isPop ? [context viewControllerForKey:UITransitionContextToViewControllerKey] : [context viewControllerForKey:UITransitionContextFromViewControllerKey];
-    toViewController = (BrowsePictureViewController *)(self.isPop ? [context viewControllerForKey:UITransitionContextFromViewControllerKey] : [context viewControllerForKey:UITransitionContextToViewControllerKey]);
-    fromViewController.view.frame = [UIScreen mainScreen].bounds;
-    toViewController.view.frame = [UIScreen mainScreen].bounds;
-    originImageView = [toViewController currentOriginImageView];
-    currentImageView = [toViewController currentImageView];
-    containerView = [context containerView];
-    [containerView addSubview:fromViewController.view];
-    [containerView addSubview:toViewController.view];
-    animationView = [[UIImageView alloc] initWithFrame:[currentImageView convertRect:currentImageView.bounds toView:containerView]];
-    animationView.contentMode = UIViewContentModeScaleAspectFill;
-    animationView.clipsToBounds = YES;
-    [containerView addSubview:animationView];
-    animationView.image = originImageView.image;
-}
-
 - (POPBasicAnimation *)popAnimation {
+    if ([self pop_animationForKey:kIMAGEVIEW_APEAR_TRANSITION_KEY]) {
+        return [self pop_animationForKey:kIMAGEVIEW_APEAR_TRANSITION_KEY];
+    }
     POPBasicAnimation *animation = [POPBasicAnimation animation];
     animation.property = [self springAnimationProperty];
     animation.duration = [self transitionDuration:context];
     animation.completionBlock = ^(POPAnimation *anim, BOOL finished) {
-        if (finished) {
-            if (self.isPop) {
-                originImageView.hidden = NO;
-                [toViewController.view removeFromSuperview];
-                [animationView removeFromSuperview];
-                [context completeTransition:![context transitionWasCancelled]];
-                fromViewController.navigationController.delegate = nil;
-            } else {
-                toViewController.view.alpha = 0;
-                toViewController.view.hidden = NO;
-                [UIView animateWithDuration:0.05 animations:^{
-                    toViewController.view.alpha = 1;
-                } completion:^(BOOL finished) {
-                    [fromViewController.view removeFromSuperview];
-                    [animationView removeFromSuperview];
-                    [context completeTransition:![context transitionWasCancelled]];
-                    toViewController.navigationController.delegate = nil;
-                }];
-            }
-        }
+        if (finished) self.isPop ? [self handlePopAnimationFinished] : [self handlePushAnimtionFinished];
     };
+    [self pop_addAnimation:animation forKey:kIMAGEVIEW_APEAR_TRANSITION_KEY];
     return animation;
 }
+
+#pragma mark - AnimtionFinish Handler
+
+- (void)handlePopAnimationFinished {
+    originImageView.hidden = NO;
+    [toViewController.view removeFromSuperview];
+    [animationView removeFromSuperview];
+    [context completeTransition:![context transitionWasCancelled]];
+    fromViewController.navigationController.delegate = nil;
+}
+
+- (void)handlePushAnimtionFinished {
+    toViewController.view.alpha = 0;
+    toViewController.view.hidden = NO;
+    [UIView animateWithDuration:0.05 animations:^{
+        toViewController.view.alpha = 1;
+    } completion:^(BOOL finished) {
+        [fromViewController.view removeFromSuperview];
+        [animationView removeFromSuperview];
+        [context completeTransition:![context transitionWasCancelled]];
+        toViewController.navigationController.delegate = nil;
+    }];
+}
+
+#pragma mark - Progress Control
 
 - (void)setTransitionProgress:(CGFloat)transitionProgress {
     _transitionProgress = transitionProgress;
     animationView.frame = [ImageViewApearTransition rectWithProgress:transitionProgress startRect:[self fromFrame] toRect:[self toFrame]];
+    animationView.layer.cornerRadius = [ImageViewApearTransition valueWithProgress:transitionProgress startValue:originImageView.layer.cornerRadius toValue:0];
 }
+
+#pragma mark - PrivateMethod
 
 - (CGRect)toFrame {
     if (self.isPop) {
@@ -189,6 +172,25 @@ NSString *const kPOPIMAGEVIEW_APEAR_PROPERTY = @"pop.animtion.image.apear";
     } else {
         return toSize;
     }
+}
+
+- (void)configureValue {
+    [animationView pop_removeAnimationForKey:@"ImageViewApearTransition"];
+    [animationView pop_removeAnimationForKey:@"ImageViewApearCornerTransition"];
+    fromViewController = self.isPop ? [context viewControllerForKey:UITransitionContextToViewControllerKey] : [context viewControllerForKey:UITransitionContextFromViewControllerKey];
+    toViewController = (BrowsePictureViewController *)(self.isPop ? [context viewControllerForKey:UITransitionContextFromViewControllerKey] : [context viewControllerForKey:UITransitionContextToViewControllerKey]);
+    fromViewController.view.frame = [UIScreen mainScreen].bounds;
+    toViewController.view.frame = [UIScreen mainScreen].bounds;
+    originImageView = [toViewController currentOriginImageView];
+    currentImageView = [toViewController currentImageView];
+    containerView = [context containerView];
+    [containerView addSubview:fromViewController.view];
+    [containerView addSubview:toViewController.view];
+    animationView = [[UIImageView alloc] initWithFrame:[currentImageView convertRect:currentImageView.bounds toView:containerView]];
+    animationView.contentMode = UIViewContentModeScaleAspectFill;
+    animationView.clipsToBounds = YES;
+    [containerView addSubview:animationView];
+    animationView.image = originImageView.image;
 }
 
 @end
