@@ -29,6 +29,7 @@ typedef void(^ImageDownLoadFinish)(UIImage *image, NSInteger index);
 + (instancetype)create;
 - (UIImageView *)currentImageView;
 - (UIImageView *)currentOriginImageView;
+- (void)showHideAllViews:(BOOL)show;
 
 @end
 

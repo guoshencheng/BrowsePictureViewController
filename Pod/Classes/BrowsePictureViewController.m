@@ -80,6 +80,11 @@
     return imageView;
 }
 
+- (void)showHideAllViews:(BOOL)show {
+    self.collectionView.hidden = !show;
+    self.saveButton.hidden = !show;
+}
+
 - (IBAction)clickSaveImageButton:(id)sender {
     [self startIndicatorView];
     BrowsePictureCell *browsePictureCell = self.collectionView.visibleCells[0];

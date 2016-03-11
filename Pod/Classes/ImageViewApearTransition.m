@@ -47,22 +47,26 @@ NSString *const kIMAGEVIEW_APEAR_TRANSITION_KEY = @"kpop_ImageViewApearTransitio
 - (void)animateToPush {
     [self configureValue];
     originImageView.hidden = YES;
-    toViewController.view.hidden = YES;
     POPBasicAnimation *animation = [self popAnimation];
     animation.fromValue = @(0);
     animation.toValue = @(1);
+    [toViewController showHideAllViews:NO];
+    [UIView animateWithDuration:0.1 animations:^{
+        toViewController.view.alpha = 1;
+    } completion:nil];
+    
 }
 
 - (void)animateToPop {
     [self configureValue];
     originImageView.hidden = YES;
-    [UIView animateWithDuration:0.05 animations:^{
+    POPBasicAnimation *animation = [self popAnimation];
+    animation.fromValue = @(1);
+    animation.toValue = @(0);
+    [UIView animateWithDuration:0.1 animations:^{
         toViewController.view.alpha = 0;
     } completion:^(BOOL finished) {
         toViewController.view.hidden = YES;
-        POPBasicAnimation *animation = [self popAnimation];
-        animation.fromValue = @(1);
-        animation.toValue = @(0);
     }];
 }
 
@@ -91,17 +95,12 @@ NSString *const kIMAGEVIEW_APEAR_TRANSITION_KEY = @"kpop_ImageViewApearTransitio
 }
 
 - (void)handlePushAnimtionFinished {
-    toViewController.view.alpha = 0;
-    toViewController.view.hidden = NO;
-    [UIView animateWithDuration:0.05 animations:^{
-        toViewController.view.alpha = 1;
-    } completion:^(BOOL finished) {
-        originImageView.hidden = NO;
-        [fromViewController.view removeFromSuperview];
-        [animationView removeFromSuperview];
-        [context completeTransition:![context transitionWasCancelled]];
-        toViewController.navigationController.delegate = nil;
-    }];
+    [toViewController showHideAllViews:YES];
+    originImageView.hidden = NO;
+    [fromViewController.view removeFromSuperview];
+    [animationView removeFromSuperview];
+    [context completeTransition:![context transitionWasCancelled]];
+    toViewController.navigationController.delegate = nil;
 }
 
 #pragma mark - Progress Control
