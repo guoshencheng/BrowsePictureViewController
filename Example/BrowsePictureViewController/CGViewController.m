@@ -77,7 +77,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TestCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TestCell"];
-    cell.imageView.image = [UIImage imageNamed:@"test_image"];
+    cell.imageView.image = [UIImage imageNamed:indexPath.row % 2 == 0 ? @"test_image" : @"test_image2"];
     return cell;
 }
 

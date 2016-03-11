@@ -121,7 +121,7 @@ NSString *const kIMAGEVIEW_APEAR_TRANSITION_KEY = @"kpop_ImageViewApearTransitio
         if (toViewController.scaleToMax) {
             return [UIScreen mainScreen].bounds;
         } else {
-            CGSize toSize = [ImageViewApearTransition size:animationView.bounds.size aspectToFitSize:[UIScreen mainScreen].bounds.size];
+            CGSize toSize = [ImageViewApearTransition size:originImageView.image.size aspectToFitSize:[UIScreen mainScreen].bounds.size];
             CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
             CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
             return CGRectMake((screenWidth - toSize.width) / 2, (screenHeight - toSize.height) / 2, toSize.width, toSize.height);
@@ -188,7 +188,7 @@ NSString *const kIMAGEVIEW_APEAR_TRANSITION_KEY = @"kpop_ImageViewApearTransitio
     containerView = [context containerView];
     [containerView addSubview:fromViewController.view];
     [containerView addSubview:toViewController.view];
-    animationView = [[UIImageView alloc] initWithFrame:[currentImageView convertRect:currentImageView.bounds toView:containerView]];
+    animationView = [[UIImageView alloc] initWithFrame:self.isPop ? [self toFrame] : [self fromFrame]];
     animationView.contentMode = UIViewContentModeScaleAspectFill;
     animationView.clipsToBounds = YES;
     [containerView addSubview:animationView];
