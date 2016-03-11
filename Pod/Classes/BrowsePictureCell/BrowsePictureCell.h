@@ -18,6 +18,7 @@
 @property (weak, nonatomic) id<BrowsePictureCellDelegate> delegate;
 @property (assign, nonatomic) BOOL scaleToMax;
 @property (strong, nonatomic) UIImage *image;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
 - (void)updateImageViewWithImage:(UIImage *)image;
 - (void)updateUrlImage:(UIImage *)image;

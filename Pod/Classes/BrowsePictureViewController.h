@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-
 @interface BrowsePictureCustomConfig : NSObject
 
 @property (strong, nonatomic) UIImage *waterMarkImge;
@@ -25,7 +24,10 @@ typedef void(^ImageDownLoadFinish)(UIImage *image, NSInteger index);
 
 @property (weak, nonatomic) id<BrowsePictureViewControllerDelegate> delegate;
 @property (assign, nonatomic) BOOL scaleToMax;
+
 + (instancetype)create;
+- (UIImageView *)currentImageView;
+- (UIImageView *)currentOriginImageView;
 
 @end
 
@@ -38,6 +40,12 @@ typedef void(^ImageDownLoadFinish)(UIImage *image, NSInteger index);
 
 @required
 - (UIImageView *)browsePictureViewController:(BrowsePictureViewController *)browsePictureViewController imageViewAtIndex:(NSInteger)index;
+
+@end
+
+@interface UINavigationController (BrowsePictureViewController)
+
+- (void)pushBrowsePictureViewController:(BrowsePictureViewController *)browsePictureViewController;
 
 @end
 

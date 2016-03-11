@@ -9,6 +9,7 @@
 #import "BrowsePictureViewController.h"
 #import "BrowsePictureCell.h"
 #import "Masonry.h"
+#import "ImageViewApearTransition.h"
 
 @implementation UIImage (WaterMark)
 
@@ -48,7 +49,7 @@
 
 @end
 
-@interface BrowsePictureViewController () <UICollectionViewDataSource, UICollectionViewDelegate, BrowsePictureCellDelegate>
+@interface BrowsePictureViewController () <UICollectionViewDataSource, UICollectionViewDelegate, BrowsePictureCellDelegate, UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
@@ -66,6 +67,17 @@
     browsePictureViewController.automaticallyAdjustsScrollViewInsets = NO;
     browsePictureViewController.scaleToMax = NO;
     return browsePictureViewController;
+}
+
+- (UIImageView *)currentImageView {
+    BrowsePictureCell *cell = (BrowsePictureCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:self.pageControl.currentPage inSection:0]];
+    UIImageView *imageView = cell.imageView;
+    return imageView;
+}
+
+- (UIImageView *)currentOriginImageView {
+    UIImageView *imageView = [self.delegate browsePictureViewController:self imageViewAtIndex:self.pageControl.currentPage];
+    return imageView;
 }
 
 - (IBAction)clickSaveImageButton:(id)sender {
@@ -131,7 +143,9 @@
 }
 
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo; {
+    [_indicatorView stopAnimating];
     [_indicatorView removeFromSuperview];
+    _indicatorView = nil;
     if ([self.delegate respondsToSelector:@selector(browsePictureViewControllerDidFinishSaving:)]) {
         [self.delegate browsePictureViewControllerDidFinishSaving:self];
     }
@@ -140,7 +154,8 @@
 #pragma mark - BrosePictureCellDelegate
 
 - (void)browsePictureCellDidTapImage:(BrowsePictureCell *)browsePicture {
-    
+    self.navigationController.delegate = self;
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (UIImage *)waterMarkInBrowsePictureCell:(BrowsePictureCell *)cell {
@@ -180,6 +195,27 @@
     } else {
         return 1;
     }
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC {
+    if (operation == UINavigationControllerOperationPop) {
+        ImageViewApearTransition *transition = [ImageViewApearTransition new];
+        transition.isPop = YES;
+        return transition;
+    } else {
+        ImageViewApearTransition *transition = [ImageViewApearTransition new];
+        transition.isPop = NO;
+        return transition;
+    }
+}
+
+@end
+
+@implementation UINavigationController (BrowsePictureViewController)
+
+- (void)pushBrowsePictureViewController:(BrowsePictureViewController *)browsePictureViewController {
+    self.delegate = browsePictureViewController;
+    [self pushViewController:browsePictureViewController animated:YES];
 }
 
 @end

@@ -8,10 +8,12 @@
 
 #import "CGViewController.h"
 #import "BrowsePictureViewController.h"
+#import <Masonry/Masonry.h>
 
 @interface CGViewController ()<BrowsePictureViewControllerDelegate>
 
 @property (strong, nonatomic) UIButton *button;
+@property (strong, nonatomic) UIImageView *imageView;
 
 @end
 
@@ -24,12 +26,31 @@
     [self.view addSubview:self.button];
     [self.button setBackgroundColor:[UIColor blackColor]];
     [self.button addTarget:self action:@selector(didClickButton) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(50, 50, 100, 100)];
+    [self.view addSubview:self.imageView];
+    [self.imageView setUserInteractionEnabled:YES];
+    [self.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(@0);
+        make.width.equalTo(@100);
+        make.height.equalTo(@100);
+    }];
+    [self.imageView setImage:[UIImage imageNamed:@"test_image"]];
+    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didClickImageView)];
+    [self.imageView addGestureRecognizer:gesture];
 }
 
 - (void)didClickButton {
     BrowsePictureViewController *viewController = [BrowsePictureViewController create];
     viewController.delegate = self;
-    [self.navigationController pushViewController:viewController animated:YES];
+    [self.navigationController pushBrowsePictureViewController:viewController];
+}
+
+- (void)didClickImageView {
+    BrowsePictureViewController *viewController = [BrowsePictureViewController create];
+    viewController.delegate = self;
+    [self.navigationController pushBrowsePictureViewController:viewController];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -42,16 +63,15 @@
 }
 
 - (NSString *)browsePictureViewController:(BrowsePictureViewController *)browsePictureViewController textAtIndex:(NSInteger)index {
-    return @"water mark test";
+    return nil;
 }
 
 - (UIImageView *)browsePictureViewController:(BrowsePictureViewController *)browsePictureViewController imageViewAtIndex:(NSInteger)index {
-    UIImageView *imageView = [[UIImageView alloc] init];
-    return imageView;
+    return self.imageView;
 }
 
 - (NSInteger)numberOfImagesInBrowsePictureViewController:(BrowsePictureViewController *)browsePitureViewController {
-    return 3;
+    return 1;
 }
 
 - (void)browsePictureViewControllerDidFinishSaving:(BrowsePictureViewController *)browsePictureViewController {

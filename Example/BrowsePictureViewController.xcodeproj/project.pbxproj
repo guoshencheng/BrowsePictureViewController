@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E5600261C926D5C00270711 /* test_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E5600251C926D5C00270711 /* test_image.png */; };
+		2E56002A1C926E8A00270711 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2E5600291C926E8A00270711 /* LaunchScreen.xib */; };
 		2EE9DE3252FD7B2C6FAEEFDC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BD61BB08B722EECFF58F05 /* libPods.a */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
@@ -21,7 +23,6 @@
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
-		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
 		DEBAE5E78465A0D39DC4F836 /* Pods_BrowsePictureViewController_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 928112F56A5E1672ABE2EAF1 /* Pods_BrowsePictureViewController_Tests.framework */; };
 /* End PBXBuildFile section */
 
@@ -38,6 +39,8 @@
 /* Begin PBXFileReference section */
 		05D1AFA4D70023830C318A2C /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		1681FADDABD7EAF3FFD25E3E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		2E5600251C926D5C00270711 /* test_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test_image.png; sourceTree = "<group>"; };
+		2E5600291C926E8A00270711 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		4107781FB5916707CC05E1AC /* BrowsePictureViewController.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = BrowsePictureViewController.podspec; path = ../BrowsePictureViewController.podspec; sourceTree = "<group>"; };
 		43BD61BB08B722EECFF58F05 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		569E96F151A3FDC62BCA98D0 /* Pods-BrowsePictureViewController_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BrowsePictureViewController_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BrowsePictureViewController_Tests/Pods-BrowsePictureViewController_Tests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -61,7 +64,6 @@
 		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		7579B32CEACDCAA6C1F84739 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		928112F56A5E1672ABE2EAF1 /* Pods_BrowsePictureViewController_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BrowsePictureViewController_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9700119BC9C725493C2E25CD /* Pods-BrowsePictureViewController_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BrowsePictureViewController_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-BrowsePictureViewController_Example/Pods-BrowsePictureViewController_Example.release.xcconfig"; sourceTree = "<group>"; };
 		9F8FFC02E5F1B6AB19B8B79E /* Pods-BrowsePictureViewController_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BrowsePictureViewController_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BrowsePictureViewController_Example/Pods-BrowsePictureViewController_Example.debug.xcconfig"; sourceTree = "<group>"; };
@@ -147,13 +149,14 @@
 		6003F593195388D20070C39A /* Example for BrowsePictureViewController */ = {
 			isa = PBXGroup;
 			children = (
+				2E5600251C926D5C00270711 /* test_image.png */,
 				6003F59C195388D20070C39A /* CGAppDelegate.h */,
 				6003F59D195388D20070C39A /* CGAppDelegate.m */,
-				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
 				6003F5A5195388D20070C39A /* CGViewController.h */,
 				6003F5A6195388D20070C39A /* CGViewController.m */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
+				2E5600291C926E8A00270711 /* LaunchScreen.xib */,
 			);
 			name = "Example for BrowsePictureViewController";
 			path = BrowsePictureViewController;
@@ -282,7 +285,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
+				2E56002A1C926E8A00270711 /* LaunchScreen.xib in Resources */,
+				2E5600261C926D5C00270711 /* test_image.png in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
 			);
