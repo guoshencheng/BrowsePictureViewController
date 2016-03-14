@@ -110,6 +110,9 @@
 - (void)configureCollectionView {
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
+    UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
+    layout.itemSize = [UIScreen mainScreen].bounds.size;
+    self.collectionView.collectionViewLayout = layout;
     [self.collectionView setContentOffset:CGPointMake(self.startPage * [UIScreen mainScreen].bounds.size.width, 0) animated:NO];
     [self.collectionView registerNib:[UINib nibWithNibName:BROWSE_PICTURE_CELL_NIBNAME bundle:nil] forCellWithReuseIdentifier:BROWSE_PICTURE_CELL_ID];
 }

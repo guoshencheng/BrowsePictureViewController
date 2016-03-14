@@ -34,6 +34,7 @@
 @implementation CGViewController
 
 - (void)viewDidLoad {
+    self.view.frame = [UIScreen mainScreen].bounds;
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 400)];
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
