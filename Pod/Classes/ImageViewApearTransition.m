@@ -60,6 +60,9 @@ NSString *const kIMAGEVIEW_APEAR_TRANSITION_KEY = @"kpop_ImageViewApearTransitio
 - (void)animateToPop {
     [self configureValue];
     originImageView.hidden = YES;
+    if ([toViewController.delegate respondsToSelector:@selector(browsePictureViewControllerWillPopBack:)]) {
+        [toViewController.delegate browsePictureViewControllerWillPopBack:toViewController];
+    }
     POPBasicAnimation *animation = [self popAnimation];
     animation.fromValue = @(1);
     animation.toValue = @(0);
@@ -88,6 +91,9 @@ NSString *const kIMAGEVIEW_APEAR_TRANSITION_KEY = @"kpop_ImageViewApearTransitio
 
 - (void)handlePopAnimationFinished {
     originImageView.hidden = NO;
+    if ([toViewController.delegate respondsToSelector:@selector(browsePictureViewControllerDidPopBack:)]) {
+        [toViewController.delegate browsePictureViewControllerDidPopBack:toViewController];
+    }
     [toViewController.view removeFromSuperview];
     [animationView removeFromSuperview];
     [context completeTransition:![context transitionWasCancelled]];

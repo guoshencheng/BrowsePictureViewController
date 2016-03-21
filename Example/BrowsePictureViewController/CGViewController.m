@@ -99,5 +99,12 @@
     NSLog(@"finish saving");
 }
 
+- (void)browsePictureViewControllerWillPopBack:(BrowsePictureViewController *)browsePictureViewController {
+    NSLog(@"will popback");
+}
+
+- (void)browsePictureViewControllerDidPopBack:(BrowsePictureViewController *)browsePictureViewController {
+    NSLog(@"did popback");
+}
 
 @end
