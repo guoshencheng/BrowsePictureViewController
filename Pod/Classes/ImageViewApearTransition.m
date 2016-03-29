@@ -13,6 +13,19 @@
 NSString *const kPOPIMAGEVIEW_APEAR_PROPERTY = @"pop.animtion.image.apear";
 NSString *const kIMAGEVIEW_APEAR_TRANSITION_KEY = @"kpop_ImageViewApearTransition";
 
+@implementation UIImage (ImageViewApearTransition)
+
++ (UIImage *)browseImageWithView:(UIView *)view {
+    CGSize size = view.bounds.size;
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0.0);
+    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
+
+@end
+
 @interface ImageViewApearTransition ()
 
 @property (assign, nonatomic) CGFloat transitionProgress;
@@ -24,7 +37,7 @@ NSString *const kIMAGEVIEW_APEAR_TRANSITION_KEY = @"kpop_ImageViewApearTransitio
     BrowsePictureViewController *toViewController;
     UIImageView *animationView;
     id<UIViewControllerContextTransitioning> context;
-    UIImageView *originImageView;
+    UIView *originImageView;
     UIImageView *currentImageView;
     UIView *containerView;
 }
@@ -126,7 +139,7 @@ NSString *const kIMAGEVIEW_APEAR_TRANSITION_KEY = @"kpop_ImageViewApearTransitio
         if (toViewController.scaleToMax) {
             return [UIScreen mainScreen].bounds;
         } else {
-            CGSize toSize = [ImageViewApearTransition size:originImageView.image.size aspectToFitSize:[UIScreen mainScreen].bounds.size];
+            CGSize toSize = [ImageViewApearTransition size:[self originImage].size aspectToFitSize:[UIScreen mainScreen].bounds.size];
             CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
             CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
             return CGRectMake((screenWidth - toSize.width) / 2, (screenHeight - toSize.height) / 2, toSize.width, toSize.height);
@@ -181,6 +194,14 @@ NSString *const kIMAGEVIEW_APEAR_TRANSITION_KEY = @"kpop_ImageViewApearTransitio
     }
 }
 
+- (UIImage *)originImage {
+    if ([originImageView isKindOfClass:[UIImageView class]]) {
+        return ((UIImageView *)originImageView).image;
+    } else {
+        return [UIImage browseImageWithView:originImageView];
+    }
+}
+
 - (void)configureValue {
     [animationView pop_removeAnimationForKey:@"ImageViewApearTransition"];
     [animationView pop_removeAnimationForKey:@"ImageViewApearCornerTransition"];
@@ -197,7 +218,7 @@ NSString *const kIMAGEVIEW_APEAR_TRANSITION_KEY = @"kpop_ImageViewApearTransitio
     animationView.contentMode = UIViewContentModeScaleAspectFill;
     animationView.clipsToBounds = YES;
     [containerView addSubview:animationView];
-    animationView.image = originImageView.image;
+    animationView.image = [self originImage];
 }
 
 @end

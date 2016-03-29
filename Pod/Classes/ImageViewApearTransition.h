@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@interface UIImage (ImageViewApearTransition)
+
++ (UIImage *)browseImageWithView:(UIView *)view;
+
+@end
+
 @interface ImageViewApearTransition : NSObject<UIViewControllerAnimatedTransitioning>
 
 @property (assign, nonatomic) BOOL isPop;

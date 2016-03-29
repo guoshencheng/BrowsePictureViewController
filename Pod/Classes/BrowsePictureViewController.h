@@ -44,7 +44,7 @@ typedef void(^ImageDownLoadFinish)(UIImage *image, NSInteger index);
 - (void)browsePictureViewControllerDidPopBack:(BrowsePictureViewController *)browsePictureViewController;
 
 @required
-- (UIImageView *)browsePictureViewController:(BrowsePictureViewController *)browsePictureViewController imageViewAtIndex:(NSInteger)index;
+- (UIView *)browsePictureViewController:(BrowsePictureViewController *)browsePictureViewController imageViewAtIndex:(NSInteger)index;
 
 @end
 

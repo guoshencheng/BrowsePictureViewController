@@ -76,8 +76,8 @@
     return imageView;
 }
 
-- (UIImageView *)currentOriginImageView {
-    UIImageView *imageView = [self.delegate browsePictureViewController:self imageViewAtIndex:self.pageControl.currentPage];
+- (UIView *)currentOriginImageView {
+    UIView *imageView = [self.delegate browsePictureViewController:self imageViewAtIndex:self.pageControl.currentPage];
     return imageView;
 }
 
@@ -188,8 +188,14 @@
     cell.tag = indexPath.row;
     cell.delegate = self;
     if ([self.delegate respondsToSelector:@selector(browsePictureViewController:imageViewAtIndex:)]) {
-        UIImageView *imageView = [self.delegate browsePictureViewController:self imageViewAtIndex:indexPath.row];
-        if (imageView.image) [cell updateImageViewWithImage:imageView.image];
+        UIView *view = [self.delegate browsePictureViewController:self imageViewAtIndex:indexPath.row];
+        if ([view isKindOfClass:[UIImageView class]]) {
+            UIImageView *imageView = (UIImageView *)view;
+            if (imageView.image) [cell updateImageViewWithImage:imageView.image];
+        } else {
+            UIImage *image = [UIImage browseImageWithView:view];
+            [cell updateImageViewWithImage:image];
+        }
     }
     if ([self.delegate respondsToSelector:@selector(browsePictureViewController:downLoadImage:index:)]) {
         [self.delegate browsePictureViewController:self downLoadImage:^(UIImage *image, NSInteger index) {

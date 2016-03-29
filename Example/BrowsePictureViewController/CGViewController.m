@@ -86,9 +86,9 @@
     
 }
 
-- (UIImageView *)browsePictureViewController:(BrowsePictureViewController *)browsePictureViewController imageViewAtIndex:(NSInteger)index {
+- (UIView *)browsePictureViewController:(BrowsePictureViewController *)browsePictureViewController imageViewAtIndex:(NSInteger)index {
     TestCell *cell = (TestCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:index inSection:0]];
-    return cell.imageView;
+    return cell;
 }
 
 - (NSInteger)numberOfImagesInBrowsePictureViewController:(BrowsePictureViewController *)browsePitureViewController {

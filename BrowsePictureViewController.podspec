@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "BrowsePictureViewController"
-  s.version          = "1.2.0"
+  s.version          = "1.3.0"
   s.summary          = "view controller for browsePicture"
 
 # This description is used to generate tags and improve search results.
