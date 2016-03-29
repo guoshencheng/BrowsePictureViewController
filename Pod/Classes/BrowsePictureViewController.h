@@ -25,6 +25,7 @@ typedef void(^ImageDownLoadFinish)(UIImage *image, NSInteger index);
 @property (weak, nonatomic) id<BrowsePictureViewControllerDelegate> delegate;
 @property (assign, nonatomic) BOOL scaleToMax;
 @property (assign, nonatomic) NSInteger startPage;
+@property (assign, nonatomic) BOOL needWaterMark;
 
 + (instancetype)create;
 - (UIImageView *)currentImageView;

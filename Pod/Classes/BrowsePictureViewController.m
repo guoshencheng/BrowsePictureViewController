@@ -66,6 +66,7 @@
     BrowsePictureViewController *browsePictureViewController = [[BrowsePictureViewController alloc] init];
     browsePictureViewController.automaticallyAdjustsScrollViewInsets = NO;
     browsePictureViewController.scaleToMax = NO;
+    browsePictureViewController.needWaterMark = YES;
     return browsePictureViewController;
 }
 
@@ -140,7 +141,7 @@
 }
 
 - (UIImage *)waterMarkImage {
-    return [BrowsePictureCustomConfig sharedConfig].waterMarkImge;
+    return self.needWaterMark ? [BrowsePictureCustomConfig sharedConfig].waterMarkImge : nil;
 }
 
 #pragma mark - Private Method
