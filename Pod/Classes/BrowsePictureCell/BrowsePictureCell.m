@@ -126,7 +126,8 @@
     self.scrollView.userInteractionEnabled = YES;
     self.scrollView.contentSize = self.image.size;
     [self.scrollView setMaximumZoomScale:[self calculatePictureScrollViewMaxZoomScale]];
-    [self.scrollView setZoomScale:self.scaleToMax ? [self calculatePictureScrollViewMaxZoomScale] : BROWSE_PICTURE_CELL_DEFAULT_SCALE];
+    [self.scrollView setMinimumZoomScale:[self calculatePictureScrollViewMinZoomScale]];
+    [self.scrollView setZoomScale:self.scaleToMax ? [self calculatePictureScrollViewMaxZoomScale] : [self calculatePictureScrollViewMinZoomScale]];
     [self centerScrollViewContents];
 }
 
@@ -165,7 +166,15 @@
 - (CGFloat)calculatePictureScrollViewMaxZoomScale {
     CGSize screenSize = [UIScreen mainScreen].bounds.size;
     CGSize imageSize = CGSizeMake([UIScreen mainScreen].bounds.size.width, self.image.size.height * [UIScreen mainScreen].bounds.size.width / self.image.size.width);
-    return [BrowsePictureCell scaleOfsize:imageSize toAspectFillSize:screenSize];
+    CGFloat scale = [BrowsePictureCell scaleOfsize:imageSize toAspectFillSize:screenSize];
+    return scale;
+}
+
+- (CGFloat)calculatePictureScrollViewMinZoomScale {
+    CGSize screenSize = [UIScreen mainScreen].bounds.size;
+    CGSize imageSize = CGSizeMake([UIScreen mainScreen].bounds.size.width, self.image.size.height * [UIScreen mainScreen].bounds.size.width / self.image.size.width);
+    CGFloat scale = [BrowsePictureCell scaleOfSize:imageSize toAspectFitSize:screenSize];
+    return scale;
 }
 
 - (void)centerScrollViewContents {
