@@ -108,13 +108,18 @@
     [self configureSaveButton];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self.collectionView setContentOffset:CGPointMake(self.startPage * [UIScreen mainScreen].bounds.size.width, 0) animated:NO];
+    self.pageControl.hidden = self.pageControl.numberOfPages == 1;
+}
+
 - (void)configureCollectionView {
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
     layout.itemSize = [UIScreen mainScreen].bounds.size;
     self.collectionView.collectionViewLayout = layout;
-    [self.collectionView setContentOffset:CGPointMake(self.startPage * [UIScreen mainScreen].bounds.size.width, 0) animated:NO];
     [self.collectionView registerNib:[UINib nibWithNibName:BROWSE_PICTURE_CELL_NIBNAME bundle:nil] forCellWithReuseIdentifier:BROWSE_PICTURE_CELL_ID];
 }
 
@@ -125,7 +130,7 @@
         self.pageControl.numberOfPages = 1;
     }
     self.pageControl.currentPage = self.startPage;
-    self.pageControl.hidden = self.pageControl.numberOfPages == 1;
+    self.pageControl.hidden = YES;
 }
 
 - (void)configureSaveButton {
@@ -188,7 +193,7 @@
     cell.tag = indexPath.row;
     cell.delegate = self;
     if ([self.delegate respondsToSelector:@selector(browsePictureViewController:imageViewAtIndex:)]) {
-        UIView *view = [self.delegate browsePictureViewController:self imageViewAtIndex:indexPath.row];
+        UIView *view = [self currentOriginImageView];
         if ([view isKindOfClass:[UIImageView class]]) {
             UIImageView *imageView = (UIImageView *)view;
             if (imageView.image) [cell updateImageViewWithImage:imageView.image];
