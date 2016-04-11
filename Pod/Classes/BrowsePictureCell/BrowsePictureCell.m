@@ -56,6 +56,7 @@
     self.image = image;
     if (image) {
         [self updateScrollView];
+        [self configureOffset];
     }
 }
 
@@ -154,11 +155,11 @@
 }
 
 - (void)doubleTapViewGestureAction:(UITapGestureRecognizer *)gesture {
-    if (self.scrollView.zoomScale == BROWSE_PICTURE_CELL_DEFAULT_SCALE) {
+    if (self.scrollView.zoomScale == [self calculatePictureScrollViewMinZoomScale]) {
         [self.scrollView setZoomScale:[self calculatePictureScrollViewMaxZoomScale] animated:YES];
         [self startMotion];
     } else {
-        [self.scrollView setZoomScale:BROWSE_PICTURE_CELL_DEFAULT_SCALE animated:YES];
+        [self.scrollView setZoomScale:[self calculatePictureScrollViewMinZoomScale] animated:YES];
         [self stopMotion];
     }
 }
@@ -186,6 +187,12 @@
     CGFloat offsetY = (scrollView.bounds.size.height > scrollView.contentSize.height) ? (scrollView.bounds.size.height - scrollView.contentSize.height) * 0.5 : 0.0;
     CGPoint actualCenter = CGPointMake(scrollView.contentSize.width * 0.5 + offsetX, scrollView.contentSize.height * 0.5 + offsetY);
     return actualCenter;
+}
+
+- (void)configureOffset {
+    CGFloat offsetY = (self.scrollView.bounds.size.height > self.scrollView.contentSize.height) ? 0.0 : -(self.scrollView.bounds.size.height - self.scrollView.contentSize.height) * 0.5;
+    CGFloat offsetX = (self.scrollView.bounds.size.width > self.scrollView.contentSize.width) ? 0.0 : -(self.scrollView.bounds.size.width - self.scrollView.contentSize.width) * 0.5;
+    [self.scrollView setContentOffset:CGPointMake(offsetX, offsetY) animated:NO];
 }
 
 - (void)stopMotion {

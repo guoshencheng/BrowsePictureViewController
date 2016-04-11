@@ -67,6 +67,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     BrowsePictureViewController *viewController = [BrowsePictureViewController create];
+//    viewController.scaleToMax = YES;
     viewController.startPage = indexPath.row;
     viewController.delegate = self;
     [self.navigationController pushBrowsePictureViewController:viewController];
