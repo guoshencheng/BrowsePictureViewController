@@ -262,11 +262,12 @@
 }
 
 + (float)scaleOfSize:(CGSize)scaleSize toAspectFitSize:(CGSize)size {
-    if ((scaleSize.width / scaleSize.height)  >= (size.width / size.height)) {
-        return size.width / scaleSize.width;
-    } else {
-        return size.height / scaleSize.height;
-    }
+    return size.width / scaleSize.width;
+//    if ((scaleSize.width / scaleSize.height)  >= (size.width / size.height)) {
+//        return size.width / scaleSize.width;
+//    } else {
+//        return size.height / scaleSize.height;
+//    }
 }
 
 @end

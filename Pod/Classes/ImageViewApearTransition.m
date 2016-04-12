@@ -183,15 +183,17 @@ NSString *const kIMAGEVIEW_APEAR_TRANSITION_KEY = @"kpop_ImageViewApearTransitio
 }
 
 + (CGSize)size:(CGSize)size aspectToFitSize:(CGSize)toSize {
-    if (size.height / size.width > toSize.height / toSize.width) {
-        CGFloat scale = size.width / size.height;
-        return CGSizeMake(toSize.height * scale, toSize.height);
-    } else if (size.height / size.width < toSize.height / toSize.width) {
-        CGFloat scale = size.height / size.width;
-        return CGSizeMake(toSize.width, toSize.width * scale);
-    } else {
-        return toSize;
-    }
+    CGFloat scale = size.height / size.width;
+    return CGSizeMake(toSize.width, toSize.width * scale);
+//    if (size.height / size.width > toSize.height / toSize.width) {
+//        CGFloat scale = size.width / size.height;
+//        return CGSizeMake(toSize.height * scale, toSize.height);
+//    } else if (size.height / size.width < toSize.height / toSize.width) {
+//        CGFloat scale = size.height / size.width;
+//        return CGSizeMake(toSize.width, toSize.width * scale);
+//    } else {
+//        return toSize;
+//    }
 }
 
 - (UIImage *)originImage {
