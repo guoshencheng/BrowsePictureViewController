@@ -76,6 +76,11 @@
     return imageView;
 }
 
+- (UIView *)currentOriginImageViewWith:(NSInteger)index {
+    UIView *imageView = [self.delegate browsePictureViewController:self imageViewAtIndex:index];
+    return imageView;
+}
+
 - (UIView *)currentOriginImageView {
     UIView *imageView = [self.delegate browsePictureViewController:self imageViewAtIndex:self.pageControl.currentPage];
     return imageView;
@@ -194,7 +199,7 @@
     cell.tag = indexPath.row;
     cell.delegate = self;
     if ([self.delegate respondsToSelector:@selector(browsePictureViewController:imageViewAtIndex:)]) {
-        UIView *view = [self currentOriginImageView];
+        UIView *view = [self currentOriginImageViewWith:indexPath.row];
         if ([view isKindOfClass:[UIImageView class]]) {
             UIImageView *imageView = (UIImageView *)view;
             if (imageView.image) [cell updateImageViewWithImage:imageView.image];
