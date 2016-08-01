@@ -71,6 +71,10 @@ NSString *const kIMAGEVIEW_APEAR_TRANSITION_KEY = @"kpop_ImageViewApearTransitio
 }
 
 - (void)animateToPop {
+    if (!(BrowsePictureViewController *)(self.isPop ? [context viewControllerForKey:UITransitionContextFromViewControllerKey] : [context viewControllerForKey:UITransitionContextToViewControllerKey])) {
+        [self handlePopAnimationFinished];
+        return;
+    }
     [self configureValue];
     originImageView.hidden = YES;
     if ([toViewController.delegate respondsToSelector:@selector(browsePictureViewControllerWillPopBack:)]) {
@@ -103,12 +107,14 @@ NSString *const kIMAGEVIEW_APEAR_TRANSITION_KEY = @"kpop_ImageViewApearTransitio
 #pragma mark - AnimtionFinish Handler
 
 - (void)handlePopAnimationFinished {
-    originImageView.hidden = NO;
-    if ([toViewController.delegate respondsToSelector:@selector(browsePictureViewControllerDidPopBack:)]) {
-        [toViewController.delegate browsePictureViewControllerDidPopBack:toViewController];
+    if (originImageView) originImageView.hidden = NO;
+    if (toViewController) {
+        if ([toViewController.delegate respondsToSelector:@selector(browsePictureViewControllerDidPopBack:)]) {
+            [toViewController.delegate browsePictureViewControllerDidPopBack:toViewController];
+        }
+        [toViewController.view removeFromSuperview];
     }
-    [toViewController.view removeFromSuperview];
-    [animationView removeFromSuperview];
+    if (animationView) [animationView removeFromSuperview];
     [context completeTransition:![context transitionWasCancelled]];
     fromViewController.navigationController.delegate = nil;
 }
